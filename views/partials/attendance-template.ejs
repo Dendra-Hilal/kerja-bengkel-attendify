@@ -1,0 +1,163 @@
+:root {
+  --primary-color: #764af1;
+  --secondary-color: #603cc5;
+  --color-white: #ffffff;
+  --color-black: #1e1e1e;
+  --color-grey: #ededed;
+
+  --font-family: "Montserrat", sans-serif;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  font-family: var(--font-family);
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: var(--color-white);
+}
+
+.report {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 2.5rem 2rem;
+}
+
+.report__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.report__header h1 {
+  font-size: 2.5rem;
+  color: #1e1e1e;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+.report__header p {
+  font-size: 1rem;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.report__header p span {
+  color: #1e1e1e;
+}
+
+.report__filter {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.report__filter-date {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid #cccccc;
+  background-color: #ededed;
+  border-radius: 5px;
+}
+
+.report__filter-date p {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e1e1e;
+}
+
+.report__filter-date span {
+  font-size: 1rem;
+  color: #1e1e1e;
+}
+
+.report__filter-attendance {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.report__filter-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.report__filter-item p {
+  font-size: 1rem;
+  color: #1e1e1e;
+  font-weight: 600;
+}
+
+.report__filter-item span {
+  font-size: 1rem;
+  color: #1e1e1e;
+  border: 1px solid #cccccc;
+  background-color: #ededed;
+  border-radius: 5px;
+  padding: 0.25rem 0.75rem;
+}
+
+.report__table {
+  width: 100%;
+  height: auto;
+  border: 1px solid #1e1e1e;
+  border-collapse: collapse;
+}
+
+.report__table thead {
+  background-color: #6672f7;
+}
+
+.report__table thead tr th {
+  padding: 1.15rem;
+  border: 1px solid #1e1e1e;
+  font-size: 1rem;
+  color: var(--color-white);
+  font-weight: 600;
+}
+
+.report__table tbody {
+  background-color: #ffffff;
+}
+
+.report__table tbody tr td {
+  padding: 1rem;
+  border: 1px solid #1e1e1e;
+  font-size: 0.85rem;
+  color: #1e1e1e;
+  font-weight: 500;
+}
+
+.report__table tbody tr:nth-child(even) {
+  background-color: #ededed;
+}

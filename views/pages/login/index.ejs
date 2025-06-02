@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Attendify</title>
+    <link rel="stylesheet" href="/styles/login.css" />
+    <link rel="icon" href="/images/icon.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"
+      integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <main class="container">
+      <div class="left-panel">
+        <div class="left-panel__logo">
+          <img src="/images/logo-plain.png" alt="Logo" />
+          <span class="left-panel__brand-name">Attendify</span>
+        </div>
+        <div class="left-panel__content">
+          <div class="left-panel__description">
+            <h1>
+              Hello, Guest! <br />
+              Welcome to Attendify!
+            </h1>
+            <p>Effortlessly manage student attendance with our innovative RFID-based system. Log in to access real-time attendance tracking, detailed reports, and a seamless experience designed to enhance your educational environment.</p>
+          </div>
+          <div class="left-panel__socials-link">
+            <a href="https://www.instagram.com/atten_dify/" target="_blank">
+              <i class="ri-instagram-fill"></i>
+            </a>
+          </div>
+          <div class="left-panel__policy">
+            <p>Privacy Policy</p>
+            <a href="https://ig.me/m/atten_dify" target="_blank">Contact</a>
+            <p>&copy; 2025 Attendify</p>
+          </div>
+        </div>
+      </div>
+      <div class="right-panel">
+        <img src="/images/logo.png" alt="Logo" />
+        <h1 class="right-panel__title">Sign in</h1>
+        <p class="right-panel__subtitle">Please provide your details to sign in</p>
+        <form action="/login" method="POST" class="login-form">
+          <%- include("../../partials/messages.ejs") %>
+          <input type="email" name="email" id="email" class="login-form__input" placeholder="example@attendify.com" required />
+
+          <input type="password" name="password" id="password" class="login-form__input" placeholder="password" required />
+
+          <div class="login-form__show-password">
+            <input type="checkbox" id="showPassword" />
+            <label for="showPassword">Show Password</label>
+          </div>
+
+          <button type="submit" class="login-form__submit">Sign in</button>
+        </form>
+      </div>
+    </main>
+  </body>
+
+  <script>
+    const showPasswordCheck = document.getElementById("showPassword");
+    const inputPassword = document.getElementById("password");
+
+    showPasswordCheck.addEventListener("change", () => {
+      if (showPasswordCheck.checked) {
+        inputPassword.type = "text";
+      } else {
+        inputPassword.type = "password";
+      }
+    });
+  </script>
+</html>
