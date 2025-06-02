@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add New User</title>
+    <link rel="stylesheet" href="/styles/management-register.css" />
+    <link rel="icon" href="/images/icon.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"
+      integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="sidebar">
+      <div class="sidebar__container">
+        <div class="sidebar__logo" title="Attendify">
+          <div class="sidebar__logo-container">
+            <img src="/images/logo.png" alt="Logo" />
+          </div>
+          <span>Attendify</span>
+        </div>
+        <div class="sidebar__menu">
+          <a href="/dashboard" class="sidebar__menu-item" title="Dashboard">
+            <i class="ri-dashboard-line"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="/student" class="sidebar__menu-item" title="Student Data">
+            <i class="ri-graduation-cap-line"></i>
+            <span>Student Data</span>
+          </a>
+          <a href="/management" class="sidebar__menu-item active" title="User Management">
+            <i class="ri-user-4-line"></i>
+            <span>User Management</span>
+          </a>
+          <a href="/card" class="sidebar__menu-item" title="Card Registration">
+            <i class="ri-id-card-line"></i>
+            <span>Card Registration</span>
+          </a>
+          <a href="/attendance" class="sidebar__menu-item" title="Attendance">
+            <i class="ri-line-chart-line"></i>
+            <span>Attendance</span>
+          </a>
+        </div>
+      </div>
+      <div class="sidebar__footer">
+        <div class="sidebar__footer-info">
+          <span class="sidebar__footer-title">Help Center</span>
+          <p>Having trouble with Attendify? Please contact us for more questions.</p>
+          <a href="https://ig.me/m/atten_dify/" target="_blank"> Go To Help Center </a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="content">
+      <header class="content__header">
+        <div class="content__header-greets">
+          <span><%= todayDate %></span>
+        </div>
+        <div class="content__header-logout">
+          <span><%= user.email %></span>
+          <a href="/logout">
+            <i class="ri-logout-circle-line"></i>
+          </a>
+        </div>
+      </header>
+      <div class="content__container">
+        <h1 class="content__title">Add New User</h1>
+        <div class="content__form">
+          <form action="/management/register" method="POST" class="content__form-container">
+            <input type="text" name="username" id="username" placeholder="Enter Username" required />
+
+            <input type="email" name="email" id="email" placeholder="Enter User Email" required />
+
+            <input type="password" name="password" id="password" placeholder="Enter User Password" required />
+
+            <input type="text" name="full_name" id="full_name" placeholder="Enter User Full Name" required />
+
+            <select name="is_active" id="is_active" required>
+              <option value="1" selected>Active</option>
+              <option value="2">Inactive</option>
+            </select>
+
+            <select name="role" id="role" required>
+              <option value="" disabled selected>Select User Role</option>
+              <option value="admin">Admin</option>
+              <option value="user">User</option>
+            </select>
+
+            <button type="submit" class="btn-submit">Add New Data</button>
+
+            <a href="/management" class="btn-back">Cancel</a>
+          </form>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

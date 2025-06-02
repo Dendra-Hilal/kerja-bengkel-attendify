@@ -1,0 +1,16 @@
+# Node.js
+node_modules/
+.env
+# Logs
+logs/
+# Temp
+tmp/
+.DS_Store
+# Build
+dist/
+build/
+# Others
+.DS_Store
+*.log
+*.tmp
+*.swp

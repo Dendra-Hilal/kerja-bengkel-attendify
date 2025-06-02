@@ -1,0 +1,30 @@
+{
+  "name": "kb-template-ehe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.0",
+    "chart.js": "^4.4.9",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "http": "^0.0.1-security",
+    "mqtt": "^5.13.0",
+    "mysql2": "^3.14.1",
+    "nodemon": "^3.1.10",
+    "path": "^0.12.7",
+    "puppeteer": "^24.8.2",
+    "socket.io": "^4.8.1"
+  }
+}
