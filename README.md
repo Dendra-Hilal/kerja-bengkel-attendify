@@ -1,4 +1,4 @@
-# kerja-bengkel-attendify# Attendify – Sistem Presensi Otomatis
+# Attendify – Sistem Presensi Otomatis
 
 **Attendify** adalah sistem presensi otomatis berbasis ESP32 dan aplikasi web yang dirancang untuk memudahkan pencatatan kehadiran siswa secara efisien, akurat, dan real-time.
 
