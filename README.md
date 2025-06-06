@@ -44,4 +44,4 @@ Jika ada kendala, laporkan melalui fitur **Issues** pada repository ini.
 
 ---
 
-© 2025 Dendra Hilal – Semua hak dilindungi.
+© 2025 Dendra Hilal
