@@ -1,5 +1,5 @@
 const attendanceModel = require("../models/attendance-model");
-const getIndonesianDate  = require("../public/apps/getDateFunc");
+const getIndonesianDate = require("../public/apps/getDateFunc");
 const ejs = require("ejs");
 const path = require("path");
 const puppeteer = require("puppeteer");
@@ -46,6 +46,12 @@ exports.exportAttendance = async (req, res) => {
 
   try {
     const attendanceData = await attendanceModel.getAttendanceByDate(date, major, grade);
+
+    if (!attendanceData || attendanceData.length === 0) {
+      req.flash("warning", "No attendance data can be exported.");
+      return res.redirect("/attendance");
+    }
+
     const templatePath = path.join(__dirname, "../views/pages/attendance/pdf-template.ejs");
     const html = await ejs.renderFile(templatePath, {
       attendanceData,
@@ -61,10 +67,13 @@ exports.exportAttendance = async (req, res) => {
     const pdfBuffer = await page.pdf({ format: "A4", printBackground: true });
     await browser.close();
 
-    res.setHeader("Content-Disposition", `attachment; filename="Attendify_Report_${date}.pdf"`);
+    const fileName = `Attendify_Report_${grade}_${major}_${date}.pdf`.replace(/\s+/g, "_");
+    res.setHeader("Content-Disposition", `attachment; filename="${fileName}"`);
     res.setHeader("Content-Type", "application/pdf");
     res.send(pdfBuffer);
   } catch (error) {
     console.error("Terjadi kesalahan dalam mencetak laporan presensi:", error);
+    req.flash("error", "Failed to export attendance data.");
+    res.redirect("/attendance");
   }
 };

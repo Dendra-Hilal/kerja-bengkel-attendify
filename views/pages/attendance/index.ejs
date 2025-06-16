@@ -107,6 +107,9 @@
             </select>
           </div>
         </div>
+
+        <div id="notification" class="alert" style="display:none;"></div>
+
         <table class="content__table">
           <thead>
             <tr>
@@ -150,7 +153,39 @@
       </div>
     </main>
   </body>
+  <script src="/socket.io/socket.io.js"></script>
   <script>
+    const socket = io();
+    const notification = document.getElementById("notification");
+
+    socket.on("attendance", (data) => {
+      console.log("Event attendance diterima:", data);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    });
+
+    socket.on("notification", (data) => {
+      if (data && data.message) {
+        notification.textContent = data.message;
+        notification.classList.remove("alert-success", "alert-error");
+
+        if (data.type === "error") {
+          notification.classList.add("alert-error");
+        } else if (data.type === "success") {
+          notification.classList.add("alert-success");
+        } else if (data.type === "warning") {
+          notification.classList.add("alert-warning");
+        }
+
+        notification.style.display = "block";
+
+        setTimeout(() => {
+          notification.style.display = "none";
+        }, 1500);
+      }
+    })
+
     function applyFilter() {
       const date = document.getElementById("date").value;
       const major = document.getElementById("major").value;

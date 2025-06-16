@@ -39,16 +39,21 @@ function connectMQTT(io) {
           console.log("UID telah terdaftar.");
         }
       } else if (data.mode === "Masuk") {
-        const query = `SELECT id FROM students WHERE uid_card = ?`;
+        const query = `SELECT id, is_active FROM students WHERE uid_card = ?`;
         const [students] = await database.execute(query, [uid]);
+
         if (students.length === 0) {
           console.log("UID tidak terdaftar:", uid);
+          io.emit("notification", { type: "error", message: "This ID is not registered." });
           return;
         }
+
         if (students[0].is_active === 0) {
           console.log("Siswa dengan UID ini tidak aktif.");
+          io.emit("notification", { type: "error", message: "Student with this ID is not active." });
           return;
         }
+
         const student_id = students[0].id;
         const now = new Date();
         const attendanceDate = now.toISOString().split("T")[0];
@@ -64,16 +69,22 @@ function connectMQTT(io) {
 
         if (existing.length > 0) {
           console.log(`Check-in sudah dilakukan hari ini untuk student_id ${student_id}, scan diabaikan.`);
+          io.emit("notification", { type: "error", message: "This ID already checked in." });
           return;
         }
+
         const check_in = `INSERT INTO attendances (student_id, attendance_date, check_in_time, check_out_time) VALUES (?, ?, ?, NULL)`;
         await database.execute(check_in, [student_id, attendanceDate, now]);
+
+        io.emit("attendance", { message: "Data absensi tersedia" });
+        io.emit("notification", { type: "success", message: "Successfully checked in." });
 
         console.log(`Check-in direkam oleh siswa dengan id: ${student_id} pada ${now}`);
       } else if (data.mode === "Pulang") {
         const query = `SELECT id FROM students WHERE uid_card = ?`;
         const [students] = await database.execute(query, [uid]);
         if (students.length === 0) {
+          io.emit("notification", { type: "warning", message: "This ID is not registered." });
           console.log("UID tidak terdaftar:", uid);
           return;
         }
@@ -88,12 +99,18 @@ function connectMQTT(io) {
           LIMIT 1`,
           [now, student_id]
         );
+
+        io.emit("attendance", { message: "Data absensi tersedia" });
+        
         if (result.affectedRows === 0) {
+          io.emit("notification", { type: "error", message: "This ID has not done a check-in yet today." });
           console.log(`Tidak ada record check-in terbuka untuk student_id ${student_id}`);
         } else {
+          io.emit("notification", { type: "success", message: "Successfully checked out." });
           console.log(`Check-out direkam oleh siswa dengan id ${student_id} pada ${now}`);
         }
       } else {
+        io.emit("notification", { type: "warning", message: "This mode is not recognized." });
         console.log("Mode tidak dikenali:", data.mode);
       }
     } catch (error) {

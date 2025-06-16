@@ -107,6 +107,7 @@
               <th>Student Name</th>
               <th>Major</th>
               <th>Class</th>
+              <th>Status</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -117,6 +118,9 @@
                 <td><%= student.full_name %></td>
                 <td><%= student.major %></td>
                 <td><%= student.class %></td>
+                <td>
+                  <span id="status-value"><%= student.is_active %></span>
+                </td>
                 <td>
                   <a href="/student/edit/<%= student.id %>" class="content__table-action action-edit">
                     <i class="ri-edit-line"></i>
@@ -146,4 +150,17 @@
       </div>
     </main>
   </body>
+  <script>
+    const statusValue = document.querySelectorAll("#status-value");
+
+    statusValue.forEach((status) => {
+      if (status.textContent === "1") {
+        status.textContent = "Active";
+        status.classList.add("status-active");
+      } else if (status.textContent === "0") {
+        status.textContent = "Inactive";
+        status.classList.add("status-inactive");
+      }
+    });
+  </script>
 </html>
